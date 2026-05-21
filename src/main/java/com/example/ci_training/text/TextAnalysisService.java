@@ -13,7 +13,7 @@ public class TextAnalysisService {
 
     public TextAnalysisResponse analyze(String text) {
         if (text == null || text.isBlank()) {
-            return new TextAnalysisResponse(0, 0, 0, null);
+            return new TextAnalysisResponse(0, 0, 0, null, 0.0);
         }
 
         String[] words = text.trim().split("\\s+");
@@ -21,8 +21,9 @@ public class TextAnalysisService {
         int charCount = text.replaceAll("\\s", "").length();
         int sentenceCount = countSentences(text);
         String mostFrequentWord = findMostFrequent(words);
+        double averageWordLength = averageWordLength(words);
 
-        return new TextAnalysisResponse(wordCount, charCount, sentenceCount, mostFrequentWord);
+        return new TextAnalysisResponse(wordCount, charCount, sentenceCount, mostFrequentWord, averageWordLength);
     }
 
     private int countSentences(String text) {
@@ -30,6 +31,13 @@ public class TextAnalysisService {
         return (int) Arrays.stream(sentences)
                 .filter(s -> !s.isBlank())
                 .count();
+    }
+
+    private double averageWordLength(String[] words) {
+        return Arrays.stream(words)
+                .mapToInt(w -> w.replaceAll("[^a-zA-Z0-9]", "").length())
+                .average()
+                .orElse(0.0);
     }
 
     private String findMostFrequent(String[] words) {

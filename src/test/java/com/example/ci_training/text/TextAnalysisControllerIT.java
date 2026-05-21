@@ -41,7 +41,8 @@ class TextAnalysisControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.wordCount").value(2))
                 .andExpect(jsonPath("$.charCount").value(10))
-                .andExpect(jsonPath("$.sentenceCount").value(1));
+                .andExpect(jsonPath("$.sentenceCount").value(1))
+                .andExpect(jsonPath("$.averageWordLength").value(5.0));
     }
 
     @Test
