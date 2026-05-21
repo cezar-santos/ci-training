@@ -4,5 +4,6 @@ public record TextAnalysisResponse(
         int wordCount,
         int charCount,
         int sentenceCount,
-        String mostFrequentWord
+        String mostFrequentWord,
+        double averageWordLength
 ) {}
