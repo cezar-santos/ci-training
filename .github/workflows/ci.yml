@@ -31,3 +31,9 @@ jobs:
 
       - name: Integration tests
         run: ./mvnw failsafe:integration-test failsafe:verify
+
+      - name: SonarCloud analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./mvnw sonar:sonar
