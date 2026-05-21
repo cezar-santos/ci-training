@@ -26,11 +26,8 @@ jobs:
       - name: Build
         run: ./mvnw package -DskipTests
 
-      - name: Unit tests
-        run: ./mvnw test
-
-      - name: Integration tests
-        run: ./mvnw failsafe:integration-test failsafe:verify
+      - name: Test
+        run: ./mvnw verify
 
       - name: SonarCloud analysis
         env:
